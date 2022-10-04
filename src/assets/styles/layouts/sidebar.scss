@@ -1,0 +1,119 @@
+@import "../config";
+
+#sidebar {
+    color: white;
+    background: #161c24;
+    width: 280px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    overflow-y: auto;
+    border-right: transparentize($grey_1, 0.8) 1px solid;
+
+    .top {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 24px 20px 16px;
+        gap: 16px;
+
+        .logo {
+            width: 40px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .title {
+                line-height: 1.5;
+                font-weight: 700;
+                font-size: 24px;
+            }
+        }
+    }
+
+    .menu {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 24px;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+            border-radius: 50%;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $grey_2;
+            border-radius: 5px;
+        }
+
+        .title {
+            width: 100%;
+            text-align: left;
+            padding: 8px 20px 8px 40px;
+            font-family: Inter;
+            font-weight: 400;
+            color: $grey_2;
+            height: 48px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 14px;
+            line-height: 1.6;
+            position: relative;
+            gap: 16px;
+            cursor: pointer;
+            
+            &:hover {
+                background: transparentize($grey_2, 0.9);
+            }
+
+            .logo {
+                width: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .fold-btn {
+                position: absolute;
+                right: 20px;
+            }
+        }
+
+        .subtitle {
+            @extend .title;
+
+            .dot {
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: $grey_2;
+            }
+        }
+
+        .subtitle-active {
+            @extend .subtitle;
+            background: transparentize($grey_2, 0.9);
+
+            .dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: $cyan_1;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,86 @@
+.input-container .outlined-input-1 {
+    width: 49%;
+}
+
+.input-container .date-time-input .MuiFormControl-root {
+    width: 100% !important;
+}
+
+.outlined-input-1 {
+    width: 100%;
+    .label {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 6px;
+    }
+
+    .helper {
+        @extend .label;
+        text-align: left;
+        color: $green_2;
+        margin-bottom: 0;
+        margin-top: 6px;
+        font-size: 16px;
+    }
+
+    .warning {
+        @extend .helper;
+        color: $yellow_2;
+    }
+
+    .error {
+        @extend .label;
+        color: $red_2;
+    }
+
+    .MuiTextField-root {
+        input {
+            color: #fff;
+        }
+
+        label {
+            color: $grey_2;
+            font-family: 'Rajdhani', sans-serif !important;
+        }
+
+        fieldset {
+            border-color: $grey_2,
+        }
+
+        &:hover fieldset {
+            border-color: #fff !important;
+        }
+
+        .Mui-focused fieldset {
+            border-color: $cyan_1 !important;
+        }
+
+        .MuiInputLabel-shrink {
+            color: $cyan_1 !important;
+        }
+    }
+}
+
+.outlined-input-2, .multiline-input {
+    @extend .outlined-input-1;
+}
+
+.outlined-select {
+    @extend .outlined-input-1;
+
+    .MuiInputBase-root {
+        color: #fff;
+    }
+
+    .MuiPaper-root {
+        background: transparentize($grey_2, 0.7);
+    }
+}
+
+.date-time-input {
+    @extend .outlined-input-1;
+}
+
+.switch {
+    color: #fff;
+}
