@@ -1,0 +1,181 @@
+@import "../config";
+
+#launchpad {
+    width: 100%;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    .create-presale {
+        max-width: 80%;
+        margin-inline: auto;
+
+        .MuiStepper-root {
+
+            .MuiSvgIcon-root {
+                color: $cyan_1;
+            }
+
+            .MuiStepLabel-label {
+                color: #fff;
+                font-family: 'Rajdhani', sans-serif;
+
+                .title {
+                    font-size: 20px;
+                }
+
+                .description {
+                    a {
+                        color: $cyan_1;
+                    }
+                }
+            }
+        }
+
+        .step-0 {
+            margin-top: 48px;
+            margin-bottom: 48px;
+            color: #fff;
+            transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            border-radius: 8px;
+            box-shadow: none;
+            padding: 20px 30px;
+            margin-inline: auto;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 24px;
+
+            .title {
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            .warning {
+                text-align: center;
+                font-size: 14px;
+                font-weight: 700;
+                color: $yellow_2;
+            }
+
+            .helper {
+                @extend .warning;
+                color: $cyan_1;
+            }
+
+            .btn-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+            }
+        }
+
+        .step-1,
+        .step-2 {
+            @extend .step-0;
+        }
+
+        .step-2 {
+            .title {
+                text-align: center;
+            }
+
+            .tier-list {
+                display: flex;
+                justify-content: center;
+                align-items: stretch;
+                gap: 24px;
+
+                .common {
+                    width: 240px;
+                    text-align: center;
+
+                    .label {
+                        font-size: 24px;
+                        font-weight: 700;
+                        margin-bottom: 16px;
+                    }
+
+                    .tier-card {
+                        height: 340px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 36px 0;
+                        font-size: 20px;
+                        line-height: 1.5;
+                        font-weight: 600;
+                        background-color: #212b36;
+                        border-radius: 12px;
+                        gap: 24px;
+                        cursor: pointer;
+
+                        .fee {
+                            font-weight: 700;
+                        }
+                    }
+                }
+
+                .gold {
+                    @extend .common;
+
+                    .label {
+                        font-size: 24px;
+                        font-weight: 700;
+                        margin-bottom: 16px;
+                    }
+                }
+
+                .platinum {
+                    @extend .common;
+
+                    .label {
+                        font-size: 24px;
+                        font-weight: 700;
+                        margin-bottom: 16px;
+                    }
+                }
+
+                .diamond {
+                    @extend .common;
+
+                    .label {
+                        font-size: 24px;
+                        font-weight: 700;
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+
+        .step-3 {
+            @extend .step-0;
+
+            .feature-line {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                // border-bottom: 1px $grey_2 solid;
+            }
+        }
+
+    }
+
+    .create-special-sale {
+        @extend .create-presale;
+    }
+
+    .create-hyper-launch {
+        @extend .create-presale;
+    }
+
+    .create-fair-launch {
+        @extend .create-presale;
+    }
+}

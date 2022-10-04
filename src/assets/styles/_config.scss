@@ -1,0 +1,28 @@
+@keyframes wallet-animation {
+    0% {
+        box-shadow: 0 0 20px;
+    }
+
+    50% {
+        box-shadow: none;
+    }
+
+    100% {
+        box-shadow: 0 0 20px;
+    }
+}
+
+$grey_1: #d6dbe0;
+$grey_2: #919eab;
+$cyan_1: #59f1f6;
+$cyan_2: #08adb3;
+$blue_1: #6fc1f5;
+$blue_2: #1890ff;
+$green_1: #a9f17f;
+$green_2: #54d62c;
+$yellow_1: #fbdd69;
+$yellow_2: #ffc107;
+$red_1: #fda38c;
+$red_2: #ff4842;
+$purple_1: #82a6fb;
+$purple_2: #3366ff;

@@ -1,0 +1,267 @@
+@import "../config";
+
+#special-sales {
+    width: 100%;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    .tab-switcher {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 9px 16px 9px 8px;
+            gap: 10px;
+        }
+
+        .tab-active {
+            @extend .tab;
+            position: relative;
+
+            &::after {
+                content: "";
+                width: 100%;
+                height: 3px;
+                background: $cyan_1;
+                position: absolute;
+                bottom: 0;
+            }
+        }
+    }
+
+    .explore {
+        max-width: 80%;
+        margin-inline: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        row-gap: 60px;
+        column-gap: 48px;
+        flex-wrap: wrap;
+
+        .special-sale-pad {
+            width: 360px;
+            padding: 54px 24px 32px;
+            background-color: #212b36;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            cursor: pointer;
+
+            &:hover {
+                transition: all 0.3s ease-in-out;
+                transform: translateY(-30px);
+                box-shadow: 0 0 20px $cyan_1;
+            }
+
+            .tier {
+                width: 54px;
+                height: 54px;
+                position: absolute;
+                top: -27px;
+                background: #161c24;
+                border-radius: 50%;
+                box-shadow: 0 0 20px $cyan_1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    width: 70%;
+                }
+            }
+
+            .section-1 {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .avatar {
+                    width: 54px;
+                    border-radius: 50%;
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .status {
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-wrap: wrap;
+                    gap: 6px;
+
+                    .status-model {
+                        padding: 4px 10px 4px 24px;
+                        font-size: 12px;
+                        font-weight: 700;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        border-radius: 8px;
+
+                        &::before {
+                            content: "";
+                            width: 6px;
+                            height: 6px;
+                            position: absolute;
+                            left: 10px;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .kyc {
+                        @extend .status-model;
+                        background: transparentize($green_1, 0.8);
+                        color: $green_2;
+
+                        &::before {
+                            background: $green_2;
+                        }
+                    }
+
+                    .audit {
+                        @extend .status-model;
+                        background: transparentize($blue_1, 0.8);
+                        color: $blue_2;
+
+                        &::before {
+                            background: $blue_2;
+                        }
+                    }
+
+                    .vetted {
+                        @extend .status-model;
+                        background: transparentize($purple_1, 0.8);
+                        color: $purple_2;
+
+                        &::before {
+                            background: $purple_2;
+                        }
+                    }
+
+                    .listed,
+                    .live {
+                        @extend .status-model;
+                        background: transparentize($cyan_1, 0.8);
+                        color: $cyan_2;
+
+                        &::before {
+                            background: $cyan_2;
+                        }
+                    }
+
+                    .upcoming {
+                        @extend .status-model;
+                        background: transparentize($yellow_1, 0.8);
+                        color: $yellow_2;
+
+                        &::before {
+                            background: $yellow_2;
+                        }
+                    }
+
+                    .canceled {
+                        @extend .status-model;
+                        background: transparentize($grey_1, 0.8);
+                        color: $grey_2;
+
+                        &::before {
+                            background: $grey_2;
+                        }
+                    }
+                }
+            }
+
+            .section-2 {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .left {
+                    .title {
+                        font-size: 24px;
+                        font-weight: 700;
+                        color: #fff;
+                    }
+
+                    .type {
+                        font-size: 600;
+                        color: #fff;
+                    }
+                }
+
+                .right {
+                    width: 30px;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .cap {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .key {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #fff;
+                }
+
+                .value {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: $cyan_2;
+                }
+            }
+
+            .liquidity,
+            .lock-time {
+                @extend .cap;
+            }
+
+            .hr {
+                width: 100%;
+                height: 1px;
+                background: transparentize($grey_1, 0.8);
+            }
+
+            .bottom {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .time {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #fff;
+                }
+
+                .right {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    gap: 16px;
+                }
+            }
+        }
+    }
+}
