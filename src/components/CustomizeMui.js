@@ -67,7 +67,7 @@ export function OutlinedSelect({ value, setValue, label, options, helper, warnin
                 // label="Select"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-            // helperText="Please select your currency"
+                // helperText="Please select your currency"
             >
                 {options.map((option, index) => (
                     <MenuItem key={index} value={option}>
@@ -101,10 +101,10 @@ export function DateTimeInput({ value, setValue, label, helper, warning, error }
     )
 }
 
-export function Switcher({label}) {
+export function Switcher({ label, value, setValue }) {
     return (
         <div className="switch">
-            <Switch />
+            <Switch value={value} onchange={(e)=> setValue(e.target.checked)} />
             <span>{label}</span>
         </div>
     )

@@ -5,7 +5,31 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { DateTimeInput, OutlinedInput1, OutlinedInput2, MultilineInput, OutlinedSelect, Switcher } from '../../components/CustomizeMui';
 
+const steps = [
+  {
+    title: "Approve Token",
+    description: "Enter the token address and approve"
+  },
+  {
+    title: "Special Sale Information",
+    description: "Enter the Special Sale information, in case of trouble check our ",
+    link: {
+      name: "Docs",
+      url: ""
+    }
+  },
+  {
+    title: "Project Information",
+    description: "Add project links, description and select tier"
+  },
+  {
+    title: "Submit",
+    description: "Submit your Special Sale"
+  },
+];
+
 export default function CreateHyperLaunch({setPage}) {
+  const [activeStep, setActiveStep] = useState(1);
 
   useEffect(() => {
     setPage(31);

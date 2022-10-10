@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { notify } from "../../utils/notifyFunctions";
 import Explore from './Explore';
 import MyContributions from './MyContributions';
@@ -18,26 +18,26 @@ export default function SpecialSales({ setPage }) {
         <div id="special-sales">
             <div className="space" />
             <div className="tab-switcher">
-                <a className={tab === "explore" ? "tab-active btn" : "tab btn"} href="/special_sales/explore">
+                <Link className={tab === "explore" ? "tab-active btn" : "tab btn"} to="/special_sales/explore">
                     <img src={all} />
                     <span>All Presales</span>
-                </a>
-                <a className={tab === "my_contributions" ? "tab-active btn" : "tab btn"} href="/special_sales/my_contributions">
+                </Link>
+                <Link className={tab === "my_contributions" ? "tab-active btn" : "tab btn"} to="/special_sales/my_contributions">
                     <img src={mine} />
                     <span>My Contributions</span>
-                </a>
-                <a className={tab === "my_favourites" ? "tab-active btn" : "tab btn"} href="/special_sales/my_favourites">
+                </Link>
+                <Link className={tab === "my_favourites" ? "tab-active btn" : "tab btn"} to="/special_sales/my_favourites">
                     <img src={heart} />
                     <span>My Favourites</span>
-                </a>
-                <a className={tab === "my_alarms" ? "tab-active btn" : "tab btn"} href="/special_sales/my_alarms">
+                </Link>
+                <Link className={tab === "my_alarms" ? "tab-active btn" : "tab btn"} to="/special_sales/my_alarms">
                     <img src={bell} />
                     <span>My Alarms</span>
-                </a>
-                <a className={tab === "my_created_presales" ? "tab-active btn" : "tab btn"} href="/special_sales/my_created_presales">
+                </Link>
+                <Link className={tab === "my_created_presales" ? "tab-active btn" : "tab btn"} to="/special_sales/my_created_presales">
                     <img src={launch} />
                     <span>My Created Presales</span>
-                </a>
+                </Link>
             </div>
             {tab === "explore" && <Explore setPage={setPage} />}
             {tab === "my_contributions" && <MyContributions setPage={setPage} />}

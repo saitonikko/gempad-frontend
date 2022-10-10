@@ -72,6 +72,13 @@
                 align-items: center;
                 gap: 12px;
             }
+            .feature-line {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                // border-bottom: 1px $grey_2 solid;
+            }
         }
 
         .step-1,
@@ -83,6 +90,8 @@
             .title {
                 text-align: center;
             }
+
+            
 
             .tier-list {
                 display: flex;
