@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
 import up from "../assets/img/icons/up.svg";
 import down from "../assets/img/icons/down.svg";
 
@@ -7,8 +8,8 @@ function MenuItem({ page, logo, title, subtitles }) {
   const [isFold, setIsFold] = useState(true);
 
   useEffect(() => {
-    console.log(page / 10)
-    console.log(subtitles[0].page / 10)
+    // console.log(page / 10)
+    // console.log(subtitles[0].page / 10)
     if(parseInt(page / 10) == subtitles[0].page / 10) {
       setIsFold(false)
     }
@@ -24,10 +25,10 @@ function MenuItem({ page, logo, title, subtitles }) {
       { 
         !isFold &&
         subtitles?.map((item, index) => (
-          <a className={item.page === page ? "subtitle-active" : "subtitle"} href={item.link} key={index}>
+          <Link className={item.page === page ? "subtitle-active" : "subtitle"} to={item.link} key={index}>
             <div className="logo"><span className="dot" /></div>
             <span>{item.name}</span>
-          </a>
+          </Link>
         ))
       }
     </>

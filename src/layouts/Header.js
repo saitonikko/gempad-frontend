@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectWallet } from '../components/ConectButton';
 
-import bsc from "../assets/img/chains/bsc.png";
 import search from "../assets/img/icons/search.svg";
 
-export default function Header({page}) {
+export default function Header({ page }) {
     return (
         <div id="header">
             <div className="left">
@@ -12,11 +13,13 @@ export default function Header({page}) {
             </div>
             <div className="right">
                 <div className="header-btn">+ Create</div>
-                <div className="header-btn">
+                {/* <div className="header-btn">
                     <img src={bsc} />
                     BSC Testnet
                     </div>
-                <div className="header-btn">Connect</div>
+                <div className="header-btn">Connect</div> */}
+                {/* <ConnectButton accountStatus="address" showBalance={false} /> */}
+                <ConnectWallet />
             </div>
         </div>
     )

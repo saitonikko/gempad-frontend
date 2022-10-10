@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { notify } from "../../utils/notifyFunctions";
 import Explore from './Explore';
 import QuickView from './QuickView';
@@ -20,30 +20,30 @@ export default function Presales({ setPage }) {
         <div id="presales">
             <div className="space" />
             <div className="tab-switcher">
-                <a className={tab === "quick_view"? "tab-active btn": "tab btn"} href="/presales/quick_view">
+                <Link className={tab === "quick_view"? "tab-active btn": "tab btn"} to="/presales/quick_view">
                     <img src={view} />
                     <span>Quick View</span>
-                </a>
-                <a className={tab === "explore"? "tab-active btn": "tab btn"} href="/presales/explore">
+                </Link>
+                <Link className={tab === "explore"? "tab-active btn": "tab btn"} to="/presales/explore">
                     <img src={all} />
                     <span>All Presales</span>
-                </a>
-                <a className={tab === "my_contributions"? "tab-active btn": "tab btn"} href="/presales/my_contributions">
+                </Link>
+                <Link className={tab === "my_contributions"? "tab-active btn": "tab btn"} to="/presales/my_contributions">
                     <img src={mine} />
                     <span>My Contributions</span>
-                </a>
-                <a className={tab === "my_favourites"? "tab-active btn": "tab btn"} href="/presales/my_favourites">
+                </Link>
+                <Link className={tab === "my_favourites"? "tab-active btn": "tab btn"} to="/presales/my_favourites">
                     <img src={heart} />
                     <span>My Favourites</span>
-                </a>
-                <a className={tab === "my_alarms"? "tab-active btn": "tab btn"} href="/presales/my_alarms">
+                </Link>
+                <Link className={tab === "my_alarms"? "tab-active btn": "tab btn"} to="/presales/my_alarms">
                     <img src={bell} />
                     <span>My Alarms</span>
-                </a>
-                <a className={tab === "my_created_presales"? "tab-active btn": "tab btn"} href="/presales/my_created_presales">
+                </Link>
+                <Link className={tab === "my_created_presales"? "tab-active btn": "tab btn"} to="/presales/my_created_presales">
                     <img src={launch} />
                     <span>My Created Presales</span>
-                </a>
+                </Link>
             </div>
             {tab === "explore" && <Explore setPage={setPage} />}
             {tab === "quick_view" && <QuickView setPage={setPage} />}

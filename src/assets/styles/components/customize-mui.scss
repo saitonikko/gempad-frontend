@@ -15,21 +15,27 @@
     }
 
     .helper {
-        @extend .label;
         text-align: left;
         color: $green_2;
         margin-bottom: 0;
         margin-top: 6px;
         font-size: 16px;
+        font-weight: 500;
     }
 
     .warning {
-        @extend .helper;
+        text-align: left;
+        margin-bottom: 0;
+        margin-top: 6px;
+        font-size: 16px;
+        font-weight: 500;
         color: $yellow_2;
     }
 
     .error {
-        @extend .label;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 6px;
         color: $red_2;
     }
 

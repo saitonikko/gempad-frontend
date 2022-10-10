@@ -36,17 +36,17 @@
     }
 
     .explore {
-        max-width: 80%;
+        max-width: 85%;
         margin-inline: auto;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
         row-gap: 60px;
         column-gap: 48px;
-        flex-wrap: wrap;
+        flex-flow: row wrap;
 
         .presale-pad {
-            width: 360px;
+            width: 320px;
             padding: 54px 24px 32px;
             background-color: #212b36;
             border-radius: 20px;
