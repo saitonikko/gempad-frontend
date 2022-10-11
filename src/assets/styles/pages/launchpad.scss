@@ -72,6 +72,7 @@
                 align-items: center;
                 gap: 12px;
             }
+
             .feature-line {
                 width: 100%;
                 display: flex;
@@ -91,7 +92,35 @@
                 text-align: center;
             }
 
-            
+            .input-item {
+                width: 49%;
+                
+
+                .text-input {
+                    height: 56px;
+                    width: 100%;
+                    padding-left: 10px;
+                    color: $grey_1;
+                    // font-size: $fsize4;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 6px;
+                    background: none;
+                    border: 2px transparentize($grey_2, 0.5) solid;
+                    font-family: 'Rajdhani', sans-serif !important;
+
+                    &:hover {
+                        border-color: #fff;
+                    }
+
+                    &:focus {
+                        border-color: cyan;
+                        outline: none;
+                        // box-shadow: 0px 0px 10px rgba(18, 99, 241, 0.6);
+                    }
+                }
+            }
 
             .tier-list {
                 display: flex;
