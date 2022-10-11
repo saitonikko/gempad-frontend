@@ -2,12 +2,17 @@
     width: 49%;
 }
 
+.input-container .date-time-input {
+    width: 49%;
+}
+
 .input-container .date-time-input .MuiFormControl-root {
     width: 100% !important;
 }
 
 .outlined-input-1 {
     width: 100%;
+
     .label {
         font-size: 12px;
         font-weight: 500;
@@ -67,7 +72,8 @@
     }
 }
 
-.outlined-input-2, .multiline-input {
+.outlined-input-2,
+.multiline-input {
     @extend .outlined-input-1;
 }
 
@@ -84,7 +90,37 @@
 }
 
 .date-time-input {
-    @extend .outlined-input-1;
+    height: 56px;
+    margin-bottom: 18px;
+
+    .ant-picker {
+        width: 100%;
+        height: 100%;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        color: $grey_2;
+        font-family: 'Rajdhani', sans-serif !important;
+        background: none;
+        border: 2px #666 solid;
+
+        .ant-picker-input input {
+            color: #fff;
+            // font-size: $fsize4;
+        }
+
+        &:hover {
+            border-color: white;
+        }
+
+        &:focus {
+            border-color: cyan;
+            outline: none;
+            // box-shadow: 0px 0px 10px rgba(18, 99, 241, 0.6)
+        }
+    }
 }
 
 .switch {

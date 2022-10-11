@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'antd/dist/antd.css';
 import './assets/styles/styles.scss';
 import Layout from './layouts';
 import Presales from './pages/presales';

@@ -71,8 +71,8 @@ export default function CreatePresale({ setPage }) {
   const [endTime, setEndTime] = useState("");
   const [endTimeString, setEndTimeString] = useState("");
   const [lockup, setLockup] = useState("");
-  const [isVesting, setIsVesting] = useState(true);
-  const [isTeamVesting, setIsTeamVesting] = useState(true);
+  const [isVesting, setIsVesting] = useState(false);
+  const [isTeamVesting, setIsTeamVesting] = useState(false);
   const [firstRelease, setFirstRelease] = useState("");
   const [vestingPeriod, setVestingPeriod] = useState("");
   const [presaleTokenRelease, setPresaleTokenRelease] = useState("");
@@ -189,10 +189,10 @@ export default function CreatePresale({ setPage }) {
   };
 
 
-  const onSubmit = async () => {
+  const submit = async () => {
     setPending4(true);
     let addrs = [address, tokenAddress, refAddress.pancakeRouter, address];
-    const poolFactory = await getPresaleFactoryContract();
+    const presaleFactory = await getPresaleFactoryContract();
     const rateSetting = ['0x' + (presaleRate * Math.pow(10, tokenDecimals)).toString(16), '0x' + (listingRate * Math.pow(10, tokenDecimals)).toString(16)];
     const contributionSettings = ['0x' + (minBuy * Math.pow(10, 18)).toString(16), '0x' + (maxBuy * Math.pow(10, 18)).toString(16)];
     const capSettings = ['0x' + (softcap * Math.pow(10, 18)).toString(16), '0x' + (hardcap * Math.pow(10, 18)).toString(16)];
@@ -201,10 +201,13 @@ export default function CreatePresale({ setPage }) {
     const teamVestingSettings = !isTeamVesting ? [0, 0, 0, 0, 0] : ['0x' + (teamVestingTokens * Math.pow(10, tokenDecimals)).toString(16), teamFirstPeriod * 60, teamFirstPercent, teamCyclePeriod * 60, teamCycleAmount];
     const urls = logoImage + ' ' + website;
     console.log(rateSetting, contributionSettings, capSettings, timeSettings, vestingSettings, teamVestingSettings, urls)
-    const fee = await poolFactory.methods.createFee().call();
+    const fee = await presaleFactory.methods.createFee().call();
+    console.log(fee);
     try {
-      const pool = await poolFactory.methods.createPool(refAddress.pool, addrs, rateSetting, contributionSettings, capSettings,
-        timeSettings, vestingSettings, teamVestingSettings, urls, liquidity, [refundType, whitelist], description).send({ from: address, value: fee });
+      console.log(refAddress.pool, addrs, rateSetting, contributionSettings, capSettings,
+        timeSettings, vestingSettings, teamVestingSettings, urls, liquidity, [refundType, wlOption], description)
+      const pool = await presaleFactory.methods.createPool(refAddress.pool, addrs, rateSetting, contributionSettings, capSettings,
+        timeSettings, vestingSettings, teamVestingSettings, urls, liquidity, [refundType, 0], description).send({ from: address, value: fee });
       const poolAddress = pool.events.CreatePool.returnValues.pool;
       setPending4(false);
     }
@@ -370,12 +373,12 @@ export default function CreatePresale({ setPage }) {
         activeStep === 1 &&
         <div className="step-1">
           <OutlinedInput1 label="Sale Title" value={saleTitle} setValue={setSaleTitle} />
-          <OutlinedInput1 label="Total Supply" />
+          <OutlinedInput1 label="Total Supply" value={tokenTotalSupply / Math.pow (10, tokenDecimals)} />
           <OutlinedSelect label="Fund Raising Token" options={["BNB", "BUSD", "Custom"]} value="BNB" />
           <OutlinedInput2 label="Presale Rate" value={presaleRate} setValue={setPresaleRate} helper="If I spend 1 BNB how many tokens will receive?" />
           <OutlinedInput2 label="DEX Listing Rate" value={listingRate} setValue={setListingRate} />
           <div className="input-container">
-            <OutlinedInput2 label="DEX Liquidity (%)" value={liquidity} setLiquidity={setLiquidity} />
+            <OutlinedInput2 label="DEX Liquidity (%)" value={liquidity} setValue={setLiquidity} />
             <OutlinedInput2 label="Liquidity Lockup (days)" value={lockup} setValue={setLockup} />
           </div>
           <div className="input-container">
@@ -384,11 +387,11 @@ export default function CreatePresale({ setPage }) {
           </div>
           <div className="input-container">
             <OutlinedInput2 label="Minimum Buy (BNB)" value={minBuy} setValue={setMinBuy} />
-            <OutlinedInput2 label="Maximum Buy (BNB)" value={minBuy} setValue={setMinBuy} />
+            <OutlinedInput2 label="Maximum Buy (BNB)" value={maxBuy} setValue={setMaxBuy} />
           </div>
           <div className="input-container">
-            <DateTimeInput label="Start Time (UTC)" />
-            <DateTimeInput label="End Time (UTC)" />
+            <DateTimeInput label="Start Time (UTC)" value={startTime} setValue={setStartTime} setTime={setStartTimeString} />
+            <DateTimeInput label="End Time (UTC)" value={endTime} setValue={setEndTime} setTime={setEndTimeString} />
           </div>
           <div className="tips">
             <span>Read more about Presale Type here&nbsp;</span><a href="">Docs</a>
@@ -416,7 +419,7 @@ export default function CreatePresale({ setPage }) {
             </>
 
           }
-          <Switcher label="Add Presale Vesting" />
+          <Switcher label="Add Presale Vesting" value={isVesting} setValue={setIsVesting} />
           {
             isVesting &&
             <>
@@ -430,12 +433,12 @@ export default function CreatePresale({ setPage }) {
               </div>
               <div className="warning">0 $coin needed to create a pool!</div>
               <div className="helper">Estimated Market Cap: 0 $</div>
-              <div className="btn-container">
-                <div className="default-btn" onClick={() => setActiveStep(activeStep - 1)}>Back</div>
-                <div className="default-btn" disabled={!createFlag2 || pending2} onClick={() => setActiveStep(activeStep + 1)}>Next</div>
-              </div>
             </>
           }
+          <div className="btn-container">
+            <div className="default-btn" onClick={() => setActiveStep(activeStep - 1)}>Back</div>
+            <div className="default-btn" disabled={!createFlag2 || pending2} onClick={() => setActiveStep(activeStep + 1)}>Next</div>
+          </div>
         </div>
       }
       {
@@ -443,7 +446,14 @@ export default function CreatePresale({ setPage }) {
         <div className="step-2">
           <div className="input-container">
             <OutlinedInput2 label="Preferred Cover Photo (Banner) Size is 1024 * 150" />
-            <OutlinedInput2 label="Logo URL" value={logoImage} setValue={logoImage} />
+            {/* <OutlinedInput2 label="Logo URL" value={logoImage} setValue={logoImage} /> */}
+            <div className="input-item">
+              {/* <label className="text-white"><div>Logo Image<span>*</span></div></label> */}
+              <input type="file" id="logo-img" accept="image/png, image/gif, image/jpeg" onChange={setImg} style={{ display: "none" }}></input>
+              <label htmlFor="logo-img" className="text-input">Logo Image, Click to upload</label>
+              {checkFlags3[0] ? <div className="warning-text">This field is required</div> : null}
+              {logoImage && <div className="tips-text">Uploaded to IPFS</div>}
+            </div>
           </div>
           <div className="input-container">
             <OutlinedInput2 label="Website" value={website} setValue={setWebsite} />
@@ -458,7 +468,7 @@ export default function CreatePresale({ setPage }) {
             <OutlinedInput2 label="Youtube Presentation Video Embed Link" value={youtube} setValue={setYoutube} />
           </div>
           <OutlinedInput2 label="Whitelist Link" value={whitelist} setValue={setWhitelist} />
-          <MultilineInput label="Stelth Wallet" value={stealth} setValue={setStealth} />
+          <MultilineInput label="Stelth Wallet" value={description} setValue={setDescription} />
           <div className="title">Select Tier:</div>
           <div className="tier-list">
             <div className="common">
@@ -617,7 +627,7 @@ export default function CreatePresale({ setPage }) {
           </div>
           <div className="btn-container">
             <div className="default-btn" onClick={(p) => setActiveStep(activeStep - 1)}>Back</div>
-            <div className="default-btn" >Complete</div>
+            <div className="default-btn" onClick={submit} >Complete</div>
           </div>
         </div>
       }

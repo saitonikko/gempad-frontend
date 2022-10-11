@@ -5,6 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Switch from '@mui/material/Switch';
+import { DatePicker } from "antd";
 import calendar from "../assets/img/icons/calendar.svg";
 
 export function OutlinedInput1({ value, setValue, label, helper, warning, error }) {
@@ -67,7 +68,7 @@ export function OutlinedSelect({ value, setValue, label, options, helper, warnin
                 // label="Select"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                // helperText="Please select your currency"
+            // helperText="Please select your currency"
             >
                 {options.map((option, index) => (
                     <MenuItem key={index} value={option}>
@@ -82,29 +83,42 @@ export function OutlinedSelect({ value, setValue, label, options, helper, warnin
     )
 }
 
-export function DateTimeInput({ value, setValue, label, helper, warning, error }) {
+// export function DateTimeInput({ value, setValue, label, helper, warning, error }) {
+//     return (
+//         <div className="date-time-input">
+//             <div className="label">{label}</div>
+//             <LocalizationProvider dateAdapter={AdapterMoment}>
+//                 <DateTimePicker
+//                     // label="Date&Time picker"
+//                     value={value}
+//                     onChange={(e) => setValue(e)}
+//                     openTo = "minutes"
+//                     views={['year', 'month', 'day', 'hours', 'minutes']}
+//                     renderInput={(params) => <TextField {...params} />}
+//                 />
+//             </LocalizationProvider>
+//             {helper && <div className="helper">{helper}</div>}
+//             {warning && <div className="warning">{warning}</div>}
+//             {error && <div className="error">{error}</div>}
+//         </div>
+//     )
+// }
+
+export function DateTimeInput({ value, setValue, setTime, label, helper, warning, error }) {
     return (
         <div className="date-time-input">
             <div className="label">{label}</div>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-                <DateTimePicker
-                    // label="Date&Time picker"
-                    value={value}
-                    onChange={(e) => setValue(e)}
-                    renderInput={(params) => <TextField {...params} />}
-                />
-            </LocalizationProvider>
+            <DatePicker format="YYYY-MM-DD HH:mm:ss" showTime={true} minuteStep={30} secondStep={60} value={value} onChange={(date, dateString) => { setValue(date); setTime(dateString); }} suffixIcon={<img src={calendar} />} />
             {helper && <div className="helper">{helper}</div>}
             {warning && <div className="warning">{warning}</div>}
             {error && <div className="error">{error}</div>}
         </div>
     )
 }
-
 export function Switcher({ label, value, setValue }) {
     return (
         <div className="switch">
-            <Switch value={value} onchange={(e)=> setValue(e.target.checked)} />
+            <Switch value={value} onChange={(e) => setValue(e.target.checked)} />
             <span>{label}</span>
         </div>
     )
