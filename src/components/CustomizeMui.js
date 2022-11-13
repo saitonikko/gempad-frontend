@@ -8,7 +8,7 @@ import Switch from '@mui/material/Switch';
 import { DatePicker } from "antd";
 import calendar from "../assets/img/icons/calendar.svg";
 
-export function OutlinedInput1({ value, setValue, label, helper, warning, error }) {
+export function OutlinedInput1({ value, setValue, label, placeholder, helper, warning, error }) {
     return (
         <div className="outlined-input-1">
             <div className="label">{label}</div>
@@ -17,30 +17,31 @@ export function OutlinedInput1({ value, setValue, label, helper, warning, error 
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 variant="outlined" />
-            {helper && <div className="helper">{helper}</div>}
-            {warning && <div className="warning">{warning}</div>}
-            {error && <div className="warning">{error}</div>}
+            {helper && <div className="helper" dangerouslySetInnerHTML={{ __html: helper }} />}
+            {warning && <div className="warning" dangerouslySetInnerHTML={{ __html: warning }} />}
+            {error && <div className="error" dangerouslySetInnerHTML={{ __html: error }} />}
         </div>
     )
 }
 
-export function OutlinedInput2({ value, setValue, label, helper, warning, error }) {
+export function OutlinedInput2({ value, setValue, label, placeholder, helper, warning, error }) {
     return (
         <div className="outlined-input-2">
             <TextField
                 fullWidth
                 label={label}
                 value={value}
+                placeholder={placeholder}
                 onChange={(e) => setValue(e.target.value)}
                 variant="outlined" />
-            {helper && <div className="helper">{helper}</div>}
-            {warning && <div className="warning">{warning}</div>}
-            {error && <div className="error">{error}</div>}
+            {helper && <div className="helper" dangerouslySetInnerHTML={{ __html: helper }} />}
+            {warning && <div className="warning" dangerouslySetInnerHTML={{ __html: warning }} />}
+            {error && <div className="error" dangerouslySetInnerHTML={{ __html: error }} />}
         </div>
     )
 }
 
-export function MultilineInput({ value, setValue, label, helper, warning, error }) {
+export function MultilineInput({ value, setValue, label, placeholder, helper, warning, error }) {
     return (
         <div className="multiline-input">
             <TextField
@@ -51,9 +52,9 @@ export function MultilineInput({ value, setValue, label, helper, warning, error 
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 variant="outlined" />
-            {helper && <div className="helper">{helper}</div>}
-            {warning && <div className="warning">{warning}</div>}
-            {error && <div className="error">{error}</div>}
+            {helper && <div className="helper" dangerouslySetInnerHTML={{ __html: helper }} />}
+            {warning && <div className="warning" dangerouslySetInnerHTML={{ __html: warning }} />}
+            {error && <div className="error" dangerouslySetInnerHTML={{ __html: error }} />}
         </div>
     )
 }
@@ -76,9 +77,9 @@ export function OutlinedSelect({ value, setValue, label, options, helper, warnin
                     </MenuItem>
                 ))}
             </TextField>
-            {helper && <div className="helper">{helper}</div>}
-            {warning && <div className="warning">{warning}</div>}
-            {error && <div className="error">{error}</div>}
+            {helper && <div className="helper" dangerouslySetInnerHTML={{ __html: helper }} />}
+            {warning && <div className="warning" dangerouslySetInnerHTML={{ __html: warning }} />}
+            {error && <div className="error" dangerouslySetInnerHTML={{ __html: error }} />}
         </div>
     )
 }
@@ -108,10 +109,10 @@ export function DateTimeInput({ value, setValue, setTime, label, helper, warning
     return (
         <div className="date-time-input">
             <div className="label">{label}</div>
-            <DatePicker format="YYYY-MM-DD HH:mm:ss" showTime={true} minuteStep={30} secondStep={60} value={value} onChange={(date, dateString) => { setValue(date); setTime(dateString); }} suffixIcon={<img src={calendar} />} />
-            {helper && <div className="helper">{helper}</div>}
-            {warning && <div className="warning">{warning}</div>}
-            {error && <div className="error">{error}</div>}
+            <DatePicker format="YYYY-MM-DD HH:mm:ss" showTime={true} minuteStep={30} secondStep={60} value={value} onChange={(date, dateString) => { setValue(date);}} suffixIcon={<img src={calendar} />} />
+            {helper && <div className="helper" dangerouslySetInnerHTML={{ __html: helper }} />}
+            {warning && <div className="warning" dangerouslySetInnerHTML={{ __html: warning }} />}
+            {error && <div className="error" dangerouslySetInnerHTML={{ __html: error }} />}
         </div>
     )
 }

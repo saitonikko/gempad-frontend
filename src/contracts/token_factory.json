@@ -1,0 +1,519 @@
+{
+    "address": "0xd579A6C7Ce48EE65dc033064AA833Bb400F75D33",
+    "abi": [
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "previousOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "OwnershipTransferred",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "symbol_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "decimals_",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "totalSupply_",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxWallet",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxTransactionAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[5]",
+                    "name": "addrs",
+                    "type": "address[5]"
+                },
+                {
+                    "internalType": "uint16[6]",
+                    "name": "feeSettings",
+                    "type": "uint16[6]"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "minimumTokenBalanceForDividends_",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "_tokenForMarketingFee",
+                    "type": "uint8"
+                }
+            ],
+            "name": "createDividendToken",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "symbol_",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "decimals_",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "totalSupply_",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxWallet",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxTransactionAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[5]",
+                    "name": "addrs",
+                    "type": "address[5]"
+                },
+                {
+                    "internalType": "uint16[6]",
+                    "name": "feeSettings",
+                    "type": "uint16[6]"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "minimumTokenBalanceForDividends_",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "_tokenForMarketingFee",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_gemAntiBot",
+                    "type": "address"
+                }
+            ],
+            "name": "createDividendTokenWithAntiBot",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "__name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "__symbol",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "__decimals",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_totalSupply",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxWallet",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxTransactionAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[3]",
+                    "name": "_accounts",
+                    "type": "address[3]"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_isMarketingFeeBaseToken",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "uint16[6]",
+                    "name": "_fees",
+                    "type": "uint16[6]"
+                }
+            ],
+            "name": "createReflectionToken",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "__name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "__symbol",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "__decimals",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_totalSupply",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxWallet",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxTransactionAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[3]",
+                    "name": "_accounts",
+                    "type": "address[3]"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_isMarketingFeeBaseToken",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "uint16[6]",
+                    "name": "_fees",
+                    "type": "uint16[6]"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_gemAntiBot",
+                    "type": "address"
+                }
+            ],
+            "name": "createReflectionTokenWithAntiBot",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_symbol",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "__decimals",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_totalSupply",
+                    "type": "uint256"
+                }
+            ],
+            "name": "createSimpleToken",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_symbol",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "__decimals",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_totalSupply",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_gemAntiBot",
+                    "type": "address"
+                }
+            ],
+            "name": "createSimpleTokenWithAntiBot",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_symbol",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "__decimals",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_totalSupply",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxWallet",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxTransactionAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[3]",
+                    "name": "_accounts",
+                    "type": "address[3]"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_isMarketingFeeBaseToken",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "uint16[4]",
+                    "name": "_fees",
+                    "type": "uint16[4]"
+                }
+            ],
+            "name": "createStandardToken",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_symbol",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint8",
+                    "name": "__decimals",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_totalSupply",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxWallet",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxTransactionAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[3]",
+                    "name": "_accounts",
+                    "type": "address[3]"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_isMarketingFeeBaseToken",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "uint16[4]",
+                    "name": "_fees",
+                    "type": "uint16[4]"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_gemAntiBot",
+                    "type": "address"
+                }
+            ],
+            "name": "createStandardTokenWithAntiBot",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getAllTokens",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "tokenAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "enum TokenFactory.TokenType",
+                            "name": "tokenType",
+                            "type": "uint8"
+                        }
+                    ],
+                    "internalType": "struct TokenFactory.Token[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "renounceOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "tokens",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "tokenAddress",
+                    "type": "address"
+                },
+                {
+                    "internalType": "enum TokenFactory.TokenType",
+                    "name": "tokenType",
+                    "type": "uint8"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "transferOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "stateMutability": "payable",
+            "type": "receive"
+        }
+    ]
+}

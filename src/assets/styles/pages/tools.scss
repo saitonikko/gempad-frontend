@@ -8,6 +8,14 @@
     gap: 48px;
 
     .airdrop {
+        .feature-line {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // border-bottom: 1px $grey_2 solid;
+        }
+
         .tab-switcher {
             display: flex;
             justify-content: center;
@@ -89,6 +97,13 @@
 
     .manage-antibot {
         @extend .presale-calculator;
+        .feature-line {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // border-bottom: 1px $grey_2 solid;
+        }
     }
 
     .stake {
