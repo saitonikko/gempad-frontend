@@ -31,6 +31,14 @@
                 font-weight: 700;
             }
 
+            .feature-line {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                // border-bottom: 1px $grey_2 solid;
+            }
+
             .btn-container {
                 display: flex;
                 justify-content: center;
@@ -51,27 +59,33 @@
             table {
                 tr {
                     text-align: left;
+                    width: 100%;
                     // border-bottom: 1px $grey_2 solid;
+
                     td {
                         font-weight: 500;
+
                         a {
                             color: $cyan_1;
                         }
                     }
+
                     .left {
                         display: flex;
                         justify-content: flex-start;
                         align-items: center;
                         gap: 16px;
                         font-weight: 500;
-                        
+
                         img {
                             width: 54px;
                         }
+
                         .title {
                             .name {
                                 font-weight: 500;
                             }
+
                             .symbol {
                                 font-size: 16px;
                                 font-weight: 500;
@@ -81,9 +95,80 @@
                     }
                 }
             }
+
+            .tip {
+                width: 100%;
+                text-align: center;
+            }
         }
     }
+
     .liquidity-lock {
         @extend .token-lock;
+    }
+
+    .lock-detail {
+        width: 72%;
+        margin-inline: auto;
+
+        .card {
+            width: 100%;
+            margin-top: 48px;
+            margin-bottom: 48px;
+            color: #fff;
+            transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            border-radius: 8px;
+            box-shadow: none;
+            padding: 20px 30px;
+            margin-inline: auto;
+            background: #212b36;
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 24px;
+
+            .title {
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            .feature-line {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                // border-bottom: 1px $grey_2 solid;
+            }
+
+            table {
+                text-align: left;
+
+                    th {
+                        font-weight: 700;
+                    }
+
+                    th, td {
+                        padding: 12px 0;
+                    }
+            }
+
+            .btn-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+
+                .default-btn {
+                    padding: 12px 48px;
+                }
+            }
+        }
+    }
+
+    .hr {
+        width: 100%;
+        height: 1px;
+        background: transparentize($grey_1, 0.8);
     }
 }

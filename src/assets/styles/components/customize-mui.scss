@@ -75,6 +75,11 @@
 .outlined-input-2,
 .multiline-input {
     @extend .outlined-input-1;
+
+    .css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input {
+        color: #fff;
+        font-family: 'Rajdhani', sans-serif !important;
+    }
 }
 
 .outlined-select {

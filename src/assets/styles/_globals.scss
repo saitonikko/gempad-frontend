@@ -15,78 +15,6 @@
     box-sizing: border-box;
 }
 
-//   html {
-//     width: 100%;
-//     height: 100%;
-//     -ms-text-size-adjust: 100%;
-//     -webkit-overflow-scrolling: touch;
-//   }
-
-//   body {
-//     width: 100%;
-//     height: 100%;
-//   }
-
-//   #root {
-//     width: 100%;
-//     height: 100%;
-//   }
-
-//   .MuiLinearProgress-dashed {
-//     visibility: hidden;
-//   }
-
-//   input[type=number] {
-//     -moz-appearance: textfield;
-//   }
-
-//   input[type=number]::-webkit-outer-spin-button {
-//     margin: 0;
-//     -webkit-appearance: none;
-//   }
-
-//   input[type=number]::-webkit-inner-spin-button {
-//     margin: 0;
-//     -webkit-appearance: none;
-//   }
-
-//   textarea::-webkit-input-placeholder {
-//     color: #637381;
-//   }
-
-//   textarea::-moz-placeholder {
-//     color: #637381;
-//     opacity: 1;
-//   }
-
-//   textarea:-ms-input-placeholder {
-//     color: #637381;
-//   }
-
-//   textarea::placeholder {
-//     color: #637381;
-//   }
-
-//   a {
-//     color: #59f1f6;
-//   }
-//   img {
-//     display: block;
-//     max-width: 100%;
-//   }
-//   .grecaptcha-badge {
-//     visibility: hidden;
-//   }
-//   .blur-up {
-//     filter: blur(5px);
-//     transition: filter 400ms, -webkit-filter 400ms;
-//     -webkit-filter: blur(5px);
-//   }
-//   .blur-up.lazyloaded  {
-//     filter: blur(0);
-//     -webkit-filter: blur(0);
-//   }
-
 body {
     font-family: 'Rajdhani', sans-serif;
     color: $grey_2;
@@ -106,6 +34,10 @@ body {
 a {
     text-decoration: unset;
     color: unset;
+
+    &:hover {
+        color: unset;
+    }
 }
 
 button {
@@ -113,6 +45,7 @@ button {
     font-family: 'Rajdhani', sans-serif;
 
     &:disabled {
+        opacity: 0.5;
         cursor: not-allowed !important;
     }
 }
@@ -150,6 +83,11 @@ button {
         box-shadow: none;
         opacity: 80%;
     }
+
+    &:disabled {
+        box-shadow: none;
+        opacity: 50%;
+    }
 }
 
 .input-container {
@@ -184,4 +122,88 @@ button {
     justify-content: center;
     align-items: center;
     gap: 12px;
+}
+
+input {
+    font-family: 'Rajdhani', sans-serif !important;
+}
+
+.ant-modal-content {
+    background: #212b36;
+    color: #ffffff;
+
+    .ant-modal-close-icon {
+        color: #fff;
+    }
+
+    .ant-modal-header {
+        background: #212b36;
+        border-color: transparentize($grey_1, 0.8);
+
+        .ant-modal-title {
+            color: #ffffff;
+        }
+    }
+
+    .ant-modal-footer {
+        border-color: transparentize($grey_1, 0.8);
+
+
+    }
+}
+
+.font-green {
+    color: $green_2;
+}
+
+.font-yellow {
+    color: $yellow_2;
+}
+
+.font-red {
+    color: $red_2;
+}
+
+.font-blue {
+    color: $blue_2;
+}
+
+.font-cyan {
+    color: $cyan_2;
+}
+
+.bg-green {
+    background: $green_1;
+}
+
+.bg-yellow {
+    background: $yellow_1;
+}
+
+.bg-red {
+    background: $red_1;
+}
+
+.bg-blue {
+    background: $blue_1;
+}
+
+.bg-cyan {
+    background: $cyan_1;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.light {
+    font-weight: 200;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.extra-bold {
+    font-weight: 900;
 }
