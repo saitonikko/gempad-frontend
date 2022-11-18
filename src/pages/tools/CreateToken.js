@@ -4,6 +4,7 @@ import { getTokenFactoryContract } from '../../utils/contractFunctions';
 import { notify } from "../../utils/notifyFunctions";
 import { OutlinedInput1, OutlinedSelect, Switcher } from '../../components/CustomizeMui';
 import antiBot from "../../contracts/anti_bot.json";
+import addresses from "../../contracts/address.json";
 
 export default function CreateToken({ setPage }) {
 
@@ -13,12 +14,13 @@ export default function CreateToken({ setPage }) {
   const [symbol, setSymbol] = useState("");
   const [decimals, setDecimals] = useState("");
   const [totalSupply, setTotalSupply] = useState("");
-  const [isAntiBot, setIsAntiBot] = useState("");
+  const [isAntiBot, setIsAntiBot] = useState(false);
   const [maxWallet, setMaxWallet] = useState("");
   const [maxTxAmount, setMaxTxAmount] = useState("");
   const [router, setRouter] = useState("Pancakeswap");
   const [baseToken, setBaseToken] = useState("");
   const [marketingWallet, setMarketingWallet] = useState("");
+  const [isMarketingFeeBaseToken, setIsMarketingFeeBaseToken] = useState(false);
   const [sellLiquidityFee, setSellLiquidityFee] = useState("");
   const [sellMarketingFee, setSellMarketingFee] = useState("");
   const [buyLiquidityFee, setBuyLiquidityFee] = useState("");
@@ -39,8 +41,8 @@ export default function CreateToken({ setPage }) {
     switch (tokenType) {
       case "Simple Token": createSimpleToken(); break;
       case "Standard Token": createStandardToken(); break;
-      // case "Reflection Token": createReflectionToken(); break;
-      // case "Dividend Token": createDividendToken(); break;
+      case "Reflection Token": createReflectionToken(); break;
+      case "Dividend Token": createDividendToken(); break;
     }
   }
 
@@ -53,11 +55,11 @@ export default function CreateToken({ setPage }) {
     try {
       const contract = await getTokenFactoryContract();
       if (!isAntiBot) {
-        const tx = await contract.methods.createSimpleToken(name, symbol, decimals, totalSupply).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        const tx = await contract.methods.createSimpleToken(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16)).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
         console.log(tx.events[0].address);
         notify(0, `create token success - ${tx.events[0].address}`);
       } else {
-        const tx = await contract.methods.createSimpleTokenWithAntiBot(name, symbol, decimals, totalSupply, antiBot.address).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        const tx = await contract.methods.createSimpleTokenWithAntiBot(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16), antiBot.address).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
         console.log(tx.events[0].address);
         notify(0, `create token success - ${tx.events[0].address}`);
       }
@@ -69,19 +71,74 @@ export default function CreateToken({ setPage }) {
   }
 
   const createStandardToken = async () => {
-    if (!name || !symbol || !decimals || !totalSupply) {
+    if (!name || !symbol || !decimals || !totalSupply || !maxWallet || !maxTxAmount || !baseToken || !marketingWallet || !sellLiquidityFee || !buyLiquidityFee || !sellMarketingFee || !buyMarketingFee) {
       notify(1, "Please fill up all fields");
       return;
     }
     setPending(true);
     try {
       const contract = await getTokenFactoryContract();
+      const accounts = [marketingWallet, addresses.pancakeRouter, baseToken];
+      const fees = [sellLiquidityFee*10, buyLiquidityFee*10, sellMarketingFee*10, buyMarketingFee*10];
       if (!isAntiBot) {
-        const tx = await contract.methods.createSimpleToken(name, symbol, decimals, totalSupply).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        const tx = await contract.methods.createStandardToken(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16), '0x' + (maxWallet * 10**(decimals)).toString(16), '0x' + (maxTxAmount * 10**(decimals)).toString(16), accounts, isMarketingFeeBaseToken, fees).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
         console.log(tx.events[0].address);
         notify(0, `create token success - ${tx.events[0].address}`);
       } else {
-        const tx = await contract.methods.createSimpleTokenWithAntiBot(name, symbol, decimals, totalSupply, antiBot.address).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        const tx = await contract.methods.createStandardTokenWithAntiBot(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16), '0x' + (maxWallet * 10**(decimals)).toString(16), '0x' + (maxTxAmount * 10**(decimals)).toString(16), accounts, isMarketingFeeBaseToken, fees, antiBot.address).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        console.log(tx.events[0].address);
+        notify(0, `create token success - ${tx.events[0].address}`);
+      }
+    } catch (err) {
+      console.log(err);
+      notify(2, "create token failed");
+    }
+    setPending(false);
+  }
+
+  const createReflectionToken = async () => {
+    if (!name || !symbol || !decimals || !totalSupply || !maxWallet || !maxTxAmount || !baseToken || !marketingWallet || !sellLiquidityFee || !buyLiquidityFee || !sellMarketingFee || !buyMarketingFee || !sellRewardFee || !buyRewardFee) {
+      notify(1, "Please fill up all fields");
+      return;
+    }
+    setPending(true);
+    try {
+      const contract = await getTokenFactoryContract();
+      const accounts = [marketingWallet, addresses.pancakeRouter, baseToken];
+      const fees = [sellLiquidityFee*10, buyLiquidityFee*10, sellMarketingFee*10, buyMarketingFee*10, sellRewardFee*10, buyRewardFee*10];
+      if (!isAntiBot) {
+        const tx = await contract.methods.createReflectionToken(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16), '0x' + (maxWallet * 10**(decimals)).toString(16), '0x' + (maxTxAmount * 10**(decimals)).toString(16), accounts, isMarketingFeeBaseToken, fees).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        console.log(tx.events[0].address);
+        notify(0, `create token success - ${tx.events[0].address}`);
+      } else {
+        const tx = await contract.methods.createReflectionTokenWithAntiBot(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16), '0x' + (maxWallet * 10**(decimals)).toString(16), '0x' + (maxTxAmount * 10**(decimals)).toString(16), accounts, isMarketingFeeBaseToken, fees, antiBot.address).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        console.log(tx.events[0].address);
+        notify(0, `create token success - ${tx.events[0].address}`);
+      }
+    } catch (err) {
+      console.log(err);
+      notify(2, "create token failed");
+    }
+    setPending(false);
+  }
+
+  const createDividendToken = async () => {
+    if (!name || !symbol || !decimals || !totalSupply || !maxWallet || !maxTxAmount || !baseToken || !marketingWallet || !reflectionToken || !minimumTokenBalanceForDividends || !sellLiquidityFee || !buyLiquidityFee || !sellMarketingFee || !buyMarketingFee || !sellRewardFee || !buyRewardFee) {
+      notify(1, "Please fill up all fields");
+      return;
+    }
+    setPending(true);
+    try {
+      const contract = await getTokenFactoryContract();
+      const accounts = [reflectionToken, addresses.pancakeRouter, marketingWallet, addresses.dividendTracker, baseToken];
+      const fees = [sellLiquidityFee*10, buyLiquidityFee*10, sellMarketingFee*10, buyMarketingFee*10, sellRewardFee*10, buyRewardFee*10];
+      const marketingFeeToken = tokenForMarketingFee === "Token itself"? 0: tokenForMarketingFee === "Base Token"? 1: 2;
+      if (!isAntiBot) {
+        const tx = await contract.methods.createReflectionToken(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16), '0x' + (maxWallet * 10**(decimals)).toString(16), '0x' + (maxTxAmount * 10**(decimals)).toString(16), accounts, fees, '0x' + (minimumTokenBalanceForDividends * 10**(decimals)).toString(16), marketingFeeToken).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
+        console.log(tx.events[0].address);
+        notify(0, `create token success - ${tx.events[0].address}`);
+      } else {
+        const tx = await contract.methods.createReflectionTokenWithAntiBot(name, symbol, decimals, '0x' + (totalSupply * 10**(decimals)).toString(16), '0x' + (maxWallet * 10**(decimals)).toString(16), '0x' + (maxTxAmount * 10**(decimals)).toString(16), accounts, fees, '0x' + (minimumTokenBalanceForDividends * 10**(decimals)).toString(16), marketingFeeToken, antiBot.address).send({ from: address, value: '0x' + (0.1 * 1e18).toString(16) });
         console.log(tx.events[0].address);
         notify(0, `create token success - ${tx.events[0].address}`);
       }
@@ -134,7 +191,10 @@ export default function CreateToken({ setPage }) {
               <OutlinedSelect label="Router" options={["Pancakeswap"]} value={router} setValue={setRouter} />
               <OutlinedInput1 label="Base Token" value={baseToken} setValue={setBaseToken} />
             </div>
-            <OutlinedInput1 label="Marketing Wallet" value={marketingWallet} setValue={setMarketingWallet} />
+            <div className="input-container">
+              <OutlinedInput1 label="Marketing Wallet" value={marketingWallet} setValue={setMarketingWallet} />
+              <Switcher label="Marketing fee in tBNB instead of token" value={isMarketingFeeBaseToken} setValue={setIsMarketingFeeBaseToken} />
+            </div>
             {
               tokenType === "Dividend Token" &&
               <>
