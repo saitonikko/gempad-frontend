@@ -43,6 +43,12 @@ a {
 button {
     border: unset;
     font-family: 'Rajdhani', sans-serif;
+    background: unset;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.6;
+    }
 
     &:disabled {
         opacity: 0.5;
@@ -173,11 +179,11 @@ input {
 }
 
 .bg-green {
-    background: $green_1;
+    background: #54D62C;
 }
 
 .bg-yellow {
-    background: $yellow_1;
+    background: #FFC107;
 }
 
 .bg-red {
@@ -185,11 +191,15 @@ input {
 }
 
 .bg-blue {
-    background: $blue_1;
+    background: #3366FF;
 }
 
 .bg-cyan {
-    background: $cyan_1;
+    background: #08ADB3;
+}
+
+.bg-grey {
+    background: #919EAB;
 }
 
 .text-center {

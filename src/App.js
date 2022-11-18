@@ -22,6 +22,7 @@ import { configureChains, chain, createClient, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import "@rainbow-me/rainbowkit/styles.css";
+import PresaleDetails from './pages/presales/PresaleDetails';
 
 
 const client = new ApolloClient({
@@ -80,6 +81,7 @@ function App() {
               <Route index element={<Link to="/presales" />} />
               <Route path="presales" element={<Link to="/presales/explore" />} />
               <Route path="presales/:tab" element={<Presales setPage={setPage} />} />
+              <Route path="presale/:saleAddress" element={<PresaleDetails setPage={setPage} />} />
               <Route path="special_sales" element={<Link to="/special_sales/explore" />} />
               <Route path="special_sales/:tab" element={<SpecialSales setPage={setPage} />} />
               <Route path="launchpad" element={<Link to="/launchpad/create_presale" />} />

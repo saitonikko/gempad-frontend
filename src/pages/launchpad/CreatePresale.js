@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi'
+import { useMutation } from "@apollo/client";
 import { notify } from "../../utils/notifyFunctions";
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -11,6 +12,7 @@ import presaleFactoryData from "../../contracts/presale-factory.json";
 import refAddress from "../../contracts/address.json";
 import { isNumber } from '../../utils/calculate';
 import moment, { isBefore, isAfter, isMoment } from 'moment';
+import { CREATE_PRESALE, ADD_WHITELIST } from '../../graphql/presale/mutations';
 
 const steps = [
   {
@@ -37,7 +39,9 @@ const steps = [
 
 export default function CreatePresale({ setPage }) {
   const { address } = useAccount();
-  const [activeStep, setActiveStep] = useState(1);
+  const [createPresale] = useMutation(CREATE_PRESALE);
+  const [addWhitelist] = useMutation(ADD_WHITELIST);
+  const [activeStep, setActiveStep] = useState(0);
 
   // =================== Step 1 =====================
   const [approveFlag1, setApproveFlag1] = useState(0);
@@ -87,8 +91,8 @@ export default function CreatePresale({ setPage }) {
   const [pending3, setPending3] = useState(false);
   const [checkFlags3, setCheckFlags3] = useState([]);
 
-  const [logoImg, setLogoImg] = useState("");
-  const [bannerImg, setBannerImg] = useState("");
+  const [logoImg, setLogoImg] = useState("https://storageapi.fleek.co/21b78ae5-2a0f-442b-bf52-fa2984aebf48-bucket/gempad/logo.png");
+  const [bannerImg, setBannerImg] = useState("https://storageapi.fleek.co/21b78ae5-2a0f-442b-bf52-fa2984aebf48-bucket/gempad/banner.png");
   const [website, setWebsite] = useState("");
   const [facebook, setFacebook] = useState("");
   const [twitter, setTwitter] = useState("");
@@ -190,19 +194,78 @@ export default function CreatePresale({ setPage }) {
     const rateSetting = ['0x' + (presaleRate * Math.pow(10, tokenDecimals)).toString(16), '0x' + (listingRate * Math.pow(10, tokenDecimals)).toString(16)];
     const contributionSettings = ['0x' + (minBuy * Math.pow(10, 18)).toString(16), '0x' + (maxBuy * Math.pow(10, 18)).toString(16)];
     const capSettings = ['0x' + (softcap * Math.pow(10, 18)).toString(16), '0x' + (hardcap * Math.pow(10, 18)).toString(16)];
-    const timeSettings = [Math.ceil(startTime.format("x") / 1000), Math.ceil(endTime.format("x") / 1000), lockupTime * 60];
-    const vestingSettings = !isVesting ? [0, 0, 0] : [firstRelease, vestingCyclePeriod * 60, vestingCycleAmount];
-    const teamVestingSettings = !isTeamVesting ? [0, 0, 0, 0, 0] : ['0x' + (teamVestingTokens * Math.pow(10, tokenDecimals)).toString(16), teamFirstPeriod * 60, teamFirstPercent, teamCyclePeriod * 60, teamCycleAmount];
+    const timeSettings = [Math.ceil(startTime.format("x") / 1000), Math.ceil(endTime.format("x") / 1000), lockupTime * 86400];
+    const vestingSettings = !isVesting ? [0, 0, 0] : [firstRelease, vestingCyclePeriod * 86400, vestingCycleAmount];
+    const teamVestingSettings = !isTeamVesting ? [0, 0, 0, 0, 0] : ['0x' + (teamVestingTokens * Math.pow(10, tokenDecimals)).toString(16), teamFirstPeriod * 86400, teamFirstPercent, teamCyclePeriod * 86400, teamCycleAmount];
     const urls = logoImg + ' ' + website;
+    const _refundType = (refundType === "Refund" ? 0 : 1);
+    const _presaleType = (presaleType === "Public" ? 0 : 1);
     console.log(rateSetting, contributionSettings, capSettings, timeSettings, vestingSettings, teamVestingSettings, urls)
     const fee = await presaleFactory.methods.createFee().call();
     console.log(fee);
     try {
       console.log(refAddress.pool, addrs, rateSetting, contributionSettings, capSettings,
-        timeSettings, vestingSettings, teamVestingSettings, urls, liquidity, [refundType, presaleType], description)
+        timeSettings, vestingSettings, teamVestingSettings, urls, liquidity, [_refundType, _presaleType], description)
       const pool = await presaleFactory.methods.createPool(refAddress.pool, addrs, rateSetting, contributionSettings, capSettings,
-        timeSettings, vestingSettings, teamVestingSettings, urls, liquidity, [refundType, 0], description).send({ from: address, value: fee });
-      const poolAddress = pool.events.CreatePool.returnValues.pool;
+        timeSettings, vestingSettings, teamVestingSettings, urls, liquidity, [_refundType, _presaleType], description).send({ from: address, value: fee });
+      const saleAddress = pool.events.CreatePool.returnValues.pool;
+      console.log(saleAddress);
+      createPresale({
+        variables: {
+          saleTitle: saleTitle,
+          saleAddress: saleAddress,
+          owner: address,
+          tokenAddress: tokenAddress,
+          tokenName: tokenName,
+          tokenSymbol: tokenSymbol,
+          tokenDecimals: tokenDecimals,
+          totalSupply: tokenTotalSupply,
+          presaleRate: presaleRate * Math.pow(10, tokenDecimals),
+          listingRate: listingRate * Math.pow(10, tokenDecimals),
+          liquidityPercent: liquidity,
+          lockupTime: lockupTime * 86400,
+          softcap: softcap * Math.pow(10, 18),
+          hardcap: hardcap * Math.pow(10, 18),
+          maxBuy: maxBuy * Math.pow(10, 18),
+          minBuy: minBuy * Math.pow(10, 18),
+          startTime: Math.ceil(startTime.format("x") / 1000),
+          endTime: Math.ceil(endTime.format("x") / 1000),
+          estimatedListingTime: Math.ceil(estimatedListingTime.format("x") / 1000),
+          refundType: refundType,
+          presaleType: presaleType,
+          isTeamVesting: isTeamVesting,
+          teamVestingTokens: teamVestingTokens * Math.pow(10, tokenDecimals),
+          teamFirstPeriod: teamFirstPeriod * 86400,
+          teamFirstPercent: teamFirstPercent,
+          teamCyclePeriod: teamCyclePeriod * 86400,
+          teamCycleAmount: teamCycleAmount,
+          isVesting: isVesting,
+          firstRelease: firstRelease,
+          vestingCyclePeriod: vestingCyclePeriod * 86400,
+          vestingCycleAmount: vestingCycleAmount,
+          needAmount: needAmount * Math.pow(10, tokenDecimals),
+          logoImg: logoImg,
+          bannerImg: bannerImg,
+          website: website,
+          facebook: facebook,
+          twitter: twitter,
+          github: github,
+          telegram: telegram,
+          discord: discord,
+          reddit: reddit,
+          youtube: youtube,
+          description: description
+        }
+      });
+      if (presaleType === "Whitelist") {
+        const listedAddresses = whitelist.split(/\r?\n/);
+        addWhitelist({
+          variables: {
+            saleAddress: saleAddress,
+            listedAddresses: listedAddresses
+          }
+        })
+      }
       setPending4(false);
     }
     catch (error) {
@@ -556,7 +619,7 @@ export default function CreatePresale({ setPage }) {
           </div>
           <div className="feature-line">
             <span className="key">Total Token</span>
-            <span className="value">{tokenTotalSupply}</span>
+            <span className="value">{(tokenTotalSupply / Math.pow(10, tokenDecimals)).toFixed(2)}</span>
           </div>
           <div className="feature-line">
             <span className="key">Presale Rate</span>
@@ -613,7 +676,7 @@ export default function CreatePresale({ setPage }) {
 
           {/* Vestings */}
           {
-            isTeamVesting || true &&
+            isTeamVesting &&
             <>
               <div className="text-center font-cyan bold">Team Vesting</div>
               <div className="feature-line">

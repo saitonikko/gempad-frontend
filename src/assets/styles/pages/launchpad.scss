@@ -39,10 +39,10 @@
             color: #fff;
             transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
             border-radius: 8px;
-            box-shadow: none;
+            box-shadow: rgb(0 0 0 / 24%) 0px 0px 2px 0px, rgb(0 0 0 / 24%) 0px 16px 32px -4px;
             padding: 20px 30px;
             margin-inline: auto;
-            background: rgba(255, 255, 255, 0.2);
+            background: #212b36;
             backdrop-filter: blur(6px);
             display: flex;
             flex-direction: column;
